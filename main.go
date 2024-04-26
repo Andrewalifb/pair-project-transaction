@@ -17,5 +17,7 @@ func main() {
 	e := echo.New()
 	e.POST("/transactions", handler.CreateTransaction)
 	e.GET("/transactions", handler.GetAllTransaction)
+	e.GET("/transactions/:id", handler.GetTransactionByID)
+	e.PUT("/transactions/:id", handler.UpdateDataTransaction)
 	e.Logger.Fatal(e.Start(":8081"))
 }
