@@ -117,3 +117,28 @@ func UpdateDataTransaction(c echo.Context) error {
 
 	return c.JSON(http.StatusCreated, result)
 }
+
+// stephen
+func DeleteDataPerson(c echo.Context) error {
+	collectionName := os.Getenv("TRANSACTION_COLLECTION")
+	collection, err := config.ConnectionDatabase(context.Background(), collectionName)
+	if err != nil {
+		return err
+	}
+
+	id, err := primitive.ObjectIDFromHex(c.Param("id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	result, err := collection.DeleteOne(context.Background(), bson.M{"_id": id})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+	}
+
+	if result.DeletedCount == 0 {
+		return echo.NewHTTPError(http.StatusNotFound, "Data Not Found")
+	}
+
+	return c.JSON(http.StatusCreated, result)
+}
