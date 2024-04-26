@@ -119,7 +119,7 @@ func UpdateDataTransaction(c echo.Context) error {
 }
 
 // stephen
-func DeleteDataPerson(c echo.Context) error {
+func DeleteDataTransaction(c echo.Context) error {
 	collectionName := os.Getenv("TRANSACTION_COLLECTION")
 	collection, err := config.ConnectionDatabase(context.Background(), collectionName)
 	if err != nil {

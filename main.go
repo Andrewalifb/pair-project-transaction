@@ -31,5 +31,6 @@ func main() {
 	e.GET("/transactions", handler.GetAllTransaction)
 	e.GET("/transactions/:id", handler.GetTransactionByID)
 	e.PUT("/transactions/:id", handler.UpdateDataTransaction)
+	e.DELETE("/transactions/:id", handler.DeleteDataTransaction)
 	e.Logger.Fatal(e.Start(":8081"))
 }
